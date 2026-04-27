@@ -24,7 +24,7 @@ import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 @Composable
 fun MatchSettings(modifier: Modifier = Modifier) {
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(title = { Text("SoccerScore") })
+        TopAppBar(title = { Text("SoccerScore - Match Settings") })
     }) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
