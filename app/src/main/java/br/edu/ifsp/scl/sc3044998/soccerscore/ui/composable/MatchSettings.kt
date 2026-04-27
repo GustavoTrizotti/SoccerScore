@@ -18,11 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchSettings(modifier: Modifier = Modifier) {
+fun MatchSettings(navHostController: NavHostController, modifier: Modifier = Modifier) {
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text("SoccerScore - Match Settings") })
     }) { innerPadding ->
@@ -64,7 +66,11 @@ fun MatchSettings(modifier: Modifier = Modifier) {
                 value = "",
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 onValueChange = {})
-            Button(onClick = {}, modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)) {
+            Button(
+                onClick = {}, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp)
+            ) {
                 Text("Ver Resultado")
             }
         }
@@ -75,6 +81,6 @@ fun MatchSettings(modifier: Modifier = Modifier) {
 @Composable
 fun MatchSettingsPreview() {
     SoccerScoreTheme {
-        MatchSettings()
+        MatchSettings(navHostController = rememberNavController())
     }
 }

@@ -18,11 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchSummary(modifier: Modifier = Modifier) {
+fun MatchSummary(navHostController: NavHostController, modifier: Modifier = Modifier) {
     Scaffold(modifier = modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text("SoccerScore - Match Summary") })
     }) { innerPadding ->
@@ -78,6 +80,6 @@ fun MatchSummary(modifier: Modifier = Modifier) {
 @Composable
 fun MatchSummaryPreview() {
     SoccerScoreTheme {
-        MatchSummary()
+        MatchSummary(navHostController = rememberNavController())
     }
 }
