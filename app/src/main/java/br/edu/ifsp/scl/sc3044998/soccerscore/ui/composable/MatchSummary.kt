@@ -18,13 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import br.edu.ifsp.scl.sc3044998.soccerscore.application.MatchSettingsDTO
 import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchSummary(navHostController: NavHostController, modifier: Modifier = Modifier) {
+fun MatchSummary(modifier: Modifier = Modifier, dto: MatchSettingsDTO? = null) {
     Scaffold(modifier = modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text("SoccerScore - Match Summary") })
     }) { innerPadding ->
@@ -45,8 +44,8 @@ fun MatchSummary(navHostController: NavHostController, modifier: Modifier = Modi
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text("Time A", fontSize = 20.sp)
-                    Text("0", fontSize = 72.sp)
+                    Text(dto?.teamA ?: "?", fontSize = 20.sp)
+                    Text(dto?.scoreA.toString(), fontSize = 72.sp)
                 }
                 Text("X", fontSize = 24.sp)
                 Column(
@@ -54,8 +53,8 @@ fun MatchSummary(navHostController: NavHostController, modifier: Modifier = Modi
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text("Time B", fontSize = 20.sp)
-                    Text("0", fontSize = 72.sp)
+                    Text(dto?.teamB ?: "?", fontSize = 20.sp)
+                    Text(dto?.scoreB.toString(), fontSize = 72.sp)
                 }
             }
             Row(
@@ -80,6 +79,6 @@ fun MatchSummary(navHostController: NavHostController, modifier: Modifier = Modi
 @Composable
 fun MatchSummaryPreview() {
     SoccerScoreTheme {
-        MatchSummary(navHostController = rememberNavController())
+        MatchSummary()
     }
 }
