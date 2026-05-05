@@ -39,7 +39,12 @@ fun MainNavigator(navHostController: NavHostController, modifier: Modifier = Mod
                 scoreA = route.scoreA,
                 scoreB = route.scoreB
             )
-            MatchSummary(modifier = modifier, dto)
+            MatchSummary(
+                modifier = modifier,
+                dto = dto,
+                onBackScreen = { navHostController.popBackStack() },
+                onNextScreen = {}
+            )
         }
     }
 }

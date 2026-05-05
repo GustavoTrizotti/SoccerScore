@@ -15,6 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,7 +24,12 @@ import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchSummary(modifier: Modifier = Modifier, dto: MatchSettingsDTO? = null) {
+fun MatchSummary(
+    modifier: Modifier = Modifier,
+    dto: MatchSettingsDTO? = null,
+    onBackScreen: () -> Unit,
+    onNextScreen: () -> Unit
+) {
     Scaffold(modifier = modifier.fillMaxSize(), topBar = {
         TopAppBar(title = { Text("SoccerScore - Match Summary") })
     }) { innerPadding ->
@@ -61,13 +67,13 @@ fun MatchSummary(modifier: Modifier = Modifier, dto: MatchSettingsDTO? = null) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Button(modifier = Modifier.weight(2f), onClick = {}) {
-                    Text("Confirmar Resultado")
+                Button(modifier = Modifier.weight(2f), onClick = { onNextScreen() }) {
+                    Text("Confirmar Resultado", textAlign = TextAlign.Center)
                 }
-                FilledTonalButton(modifier = Modifier.weight(1f), onClick = {}) {
-                    Text("Editar")
+                FilledTonalButton(modifier = Modifier.weight(1f), onClick = { onBackScreen() }) {
+                    Text("Editar", textAlign = TextAlign.Center)
                 }
             }
         }
@@ -79,6 +85,6 @@ fun MatchSummary(modifier: Modifier = Modifier, dto: MatchSettingsDTO? = null) {
 @Composable
 fun MatchSummaryPreview() {
     SoccerScoreTheme {
-        MatchSummary()
+        MatchSummary(onBackScreen = {}, onNextScreen = {})
     }
 }
