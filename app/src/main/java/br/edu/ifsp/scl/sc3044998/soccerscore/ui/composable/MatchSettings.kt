@@ -79,6 +79,12 @@ fun MatchSettings(
                 teamBError = validateTeamName(teamB, "Time B")
                 scoreBError = validateScore(scoreB, "Time B")
 
+                if (teamAError == null && teamBError == null) {
+                    val duplicatedTeamNameError = validateDuplicatedTeamName(teamA, teamB)
+                    teamAError = duplicatedTeamNameError
+                    teamBError = duplicatedTeamNameError
+                }
+
                 if (hasError()) return
                 val dto = MatchDTO(
                     teamA = teamA,
@@ -149,6 +155,12 @@ fun validateTeamName(teamName: String, teamId: String): String? {
         return "O nome do $teamId não pode ser vazio."
     if (teamName.isDigitsOnly())
         return "O nome do $teamId não pode conter apenas números."
+    return null
+}
+
+fun validateDuplicatedTeamName(teamA: String, teamB: String): String? {
+    if (teamA.isNotBlank() && teamB.isNotBlank() && teamA == teamB)
+        return "Os nomes dos times não podem ser iguais."
     return null
 }
 
