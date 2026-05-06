@@ -19,14 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.edu.ifsp.scl.sc3044998.soccerscore.application.MatchSettingsDTO
+import br.edu.ifsp.scl.sc3044998.soccerscore.application.MatchDTO
 import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MatchSummary(
     modifier: Modifier = Modifier,
-    dto: MatchSettingsDTO? = null,
+    dto: MatchDTO? = null,
     onBackScreen: () -> Unit,
     onNextScreen: () -> Unit
 ) {

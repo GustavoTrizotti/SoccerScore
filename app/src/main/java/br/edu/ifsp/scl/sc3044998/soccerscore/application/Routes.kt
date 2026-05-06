@@ -13,4 +13,9 @@ sealed class Routes {
         val teamB: String,
         val scoreB: Int
     ) : Routes()
+
+    @Serializable
+    data class MatchResults(
+        val result: String
+    ) : Routes()
 }

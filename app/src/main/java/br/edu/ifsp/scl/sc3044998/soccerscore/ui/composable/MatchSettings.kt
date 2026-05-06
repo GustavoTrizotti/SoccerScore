@@ -1,6 +1,5 @@
 package br.edu.ifsp.scl.sc3044998.soccerscore.ui.composable
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,18 +21,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
-import br.edu.ifsp.scl.sc3044998.soccerscore.application.MatchSettingsDTO
+import br.edu.ifsp.scl.sc3044998.soccerscore.application.MatchDTO
 import br.edu.ifsp.scl.sc3044998.soccerscore.ui.theme.SoccerScoreTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MatchSettings(
-    onNextScreen: (MatchSettingsDTO) -> Unit,
+    setOnReset: ((() -> Unit)?) -> Unit,
+    onNextScreen: (MatchDTO) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
@@ -59,6 +58,17 @@ fun MatchSettings(
             var scoreB by rememberSaveable { mutableStateOf("") }
             var scoreBError by rememberSaveable { mutableStateOf<String?>(null) }
 
+            setOnReset {
+                teamA = ""
+                teamAError = null
+                scoreA = ""
+                scoreAError = null
+                teamB = ""
+                teamBError = null
+                scoreB = ""
+                scoreBError = null
+            }
+
             fun hasError(): Boolean {
                 return teamAError != null || scoreAError != null || teamBError != null || scoreBError != null
             }
@@ -70,7 +80,7 @@ fun MatchSettings(
                 scoreBError = validateScore(scoreB, "Time B")
 
                 if (hasError()) return
-                val dto = MatchSettingsDTO(
+                val dto = MatchDTO(
                     teamA = teamA,
                     scoreA = scoreA.toInt(),
                     teamB = teamB,
@@ -156,6 +166,6 @@ fun validateScore(score: String, teamId: String): String? {
 @Composable
 fun MatchSettingsPreview() {
     SoccerScoreTheme {
-        MatchSettings(onNextScreen = {})
+        MatchSettings(setOnReset = {}, onNextScreen = {})
     }
 }
